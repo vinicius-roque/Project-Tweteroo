@@ -16,7 +16,15 @@ server.post('/sign-up', (req, res) => {
   res.send("OK");
 });
 
-server.get('/', (req, res) => {
+server.post('/tweets', (req, res) => {
+  const { username, tweet } = req.body;
+
+  tweet.push(req.body);
+
+  res.send("OK");
+});
+
+server.get('/tweets', (req, res) => {
   res.send('Hello World');
 });
 
