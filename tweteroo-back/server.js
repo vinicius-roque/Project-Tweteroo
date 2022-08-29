@@ -17,15 +17,20 @@ server.post('/sign-up', (req, res) => {
 });
 
 server.post('/tweets', (req, res) => {
-  const { username, tweet } = req.body;
-
   tweet.push(req.body);
 
   res.send("OK");
 });
 
 server.get('/tweets', (req, res) => {
-  res.send('Hello World');
+  const lastTweets = tweet.slice(-10);
+
+  lastTweets.forEach(tweet => {
+    const userObject = user.find(user => user.username === tweet.username);
+    tweet.avatar = userObject.avatar;
+  });
+  
+  res.send(lastTweets);
 });
 
 server.listen(5000, () => console.log("Listening on port 5000"));
